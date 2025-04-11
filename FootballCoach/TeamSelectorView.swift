@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct TeamSelectorView: View {
+    
+    //Variables
     @EnvironmentObject var authmodel: AuthViewModel
     @Binding var isPresented: Bool
+    @State private var showingAddTeamAlert = false
+    @State private var newTeamName = ""
    
-    
+    //body view
     var body: some View {
         NavigationView {
-                    List {
+            
+            List {
                         ForEach(authmodel.teams) { team in
                             HStack {
                                 Text(team.name)
@@ -31,7 +36,46 @@ struct TeamSelectorView: View {
                             }
                         }
                     }
+                        .onAppear {
+                            authmodel.fetchTeams()
+                        }
                     .navigationTitle("Velg lag")
+                    .toolbar{
+                        ToolbarItem(placement: .topBarTrailing){
+                            Button(action: {showingAddTeamAlert = true}) {
+                                Label("Add Team", systemImage: "plus")
+                            }
+                        }
+                    }
+                    .sheet(isPresented: $showingAddTeamAlert) {
+                        VStack(spacing: 20) {
+                            Text("Nytt lag")
+                                .font(.headline)
+
+                            TextField("Lagets navn", text: $newTeamName)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .padding()
+
+                            HStack {
+                                Button("Avbryt") {
+                                    showingAddTeamAlert = false
+                                    newTeamName = ""
+                                }
+                                Spacer()
+                                Button("Lagre") {
+                                    authmodel.addTeam(name: newTeamName) { success in
+                                        if success {
+                                            newTeamName = ""
+                                            showingAddTeamAlert = false
+                                        }
+                                    }
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                        .padding()
+                        .presentationDetents([.height(200)])
+                    }
                 }
         
     }

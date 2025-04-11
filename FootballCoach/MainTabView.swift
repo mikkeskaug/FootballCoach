@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainTabView: View {
+    
+    @StateObject var authmodel = AuthViewModel()
+    
     var body: some View {
         TabView {
             HomeView()

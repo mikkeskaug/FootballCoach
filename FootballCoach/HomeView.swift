@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+    @EnvironmentObject var authmodel: AuthViewModel
     @State private var showingTeamSelector = false
+    @State private var showingTeamEditor = false
     
     var body: some View {
         NavigationView{
@@ -18,16 +19,17 @@ struct HomeView: View {
                     GroupBox(label: Text("Welcome to Football Coach!")) {
                         Text("This is a simple app to help you manage your football team.")
                     }
-                    Text("Manage your team here")
-                        .bold()
-                        .padding()
+                   
                     
-                    List() {
-                        Text("Team")
-                        Text("Matches")
-                        Text("Players")
+                    
+                    GroupBox(label: Text("Manage your team here")){
+                        
+                        Text("Selected team: \(authmodel.selectedTeam?.name ?? "No team selected")")
+                        
+                        Button(action: {showingTeamEditor = true}){
+                            Text("Update Team Details")
+                        }
                     }
-                    .background(Color.secondary)
                     
                     
                     
@@ -39,13 +41,20 @@ struct HomeView: View {
             .navigationTitle(Text("Home"))
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing){
-                    Button(action: {showingTeamSelector = true}) {
-                        Label("Add Team", systemImage: "person.3.fill")
+                    Button(action: { showingTeamSelector = true }) {
+                        if let team = authmodel.selectedTeam {
+                            Label(team.name, systemImage: "person.3.fill")
+                        } else {
+                            Label("Select Team", systemImage: "person.3.fill")
+                        }
                     }
                 }
             }
             .sheet(isPresented: $showingTeamSelector) {
                 TeamSelectorView(isPresented: $showingTeamSelector)
+            }
+            .sheet(isPresented: $showingTeamEditor) {
+                TeamEditorView(isPresented: $showingTeamEditor)
             }
             
             
@@ -55,4 +64,6 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        
+        
 }
