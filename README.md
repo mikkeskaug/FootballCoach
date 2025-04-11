@@ -1,9 +1,3 @@
-Absolutely! Here’s the complete README.md — ready to copy and paste into your GitHub repo:
-
-⸻
-
-
-
 # ⚽️ CoachPlanner – SwiftUI + Firebase App for Football Coaches
 
 CoachPlanner is a SwiftUI-based mobile app designed for football coaches to organize and manage their teams, plan workouts, schedule games, and share exercises with other coaches.
@@ -23,12 +17,6 @@ Built with **Firebase** for authentication and data storage, the app follows an 
   - Shared Exercises
 - ✅ Add and edit teams
 - ✅ Syncs team data in real-time using Firebase Firestore
-
----
-
-## 📸 Screenshots
-
-_(Add some app screenshots here when you're ready)_
 
 ---
 
@@ -103,7 +91,8 @@ MIT License. See LICENSE file for details.
 
 👨‍💻 Made by
 
-@yourgithub
+
+@mikkeskaug
 
 With 💙 for coaches and the game.
 
