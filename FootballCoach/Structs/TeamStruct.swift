@@ -11,9 +11,9 @@ import FirebaseFirestore
 struct Team: Codable, Identifiable {
     @DocumentID var id: String?
     var name: String
-    var coach: String
-    var players: [String]
-    var workouts: [String]
+    var coachId: [String]?
+    var players: [Player]?
+    var workouts: [String]?
         
 }
 
