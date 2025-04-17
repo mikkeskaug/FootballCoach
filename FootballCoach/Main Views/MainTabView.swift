@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainTabView: View {
+    
+    @StateObject var authmodel = AuthViewModel()
+    
     var body: some View {
         TabView {
             HomeView()
@@ -20,7 +23,7 @@ struct MainTabView: View {
                 }
             MatchView()
                 .tabItem {
-                    Label("Match", systemImage: "soccerball.inverse")
+                    Label("Match", systemImage: "soccerball")
                 }
         } //End of TabView
     }
