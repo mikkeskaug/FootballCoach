@@ -95,7 +95,3 @@ MIT License. See LICENSE file for details.
 @mikkeskaug
 
 With 💙 for coaches and the game.
-
----
-
-Let me know if you'd like to customize the author or repo links, or if you want me to generate a `LICENSE` or GitHub badges section next!
